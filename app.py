@@ -21,15 +21,12 @@ st.set_page_config(
 )
 
 # =========================================================
-# MODERN CLOUD AESTHETIC
-# Palette: Soft Mint, Deep Forest Green, Clean White
-# Typography: Cormorant Garamond (display) + Inter (body)
+# MODERN CLOUD AESTHETIC CSS
 # =========================================================
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600&display=swap');
 
-    /* ─── Root Tokens ─── */
     :root {
         --bg-color:         #F4F7F5;
         --card-bg:          #FFFFFF;
@@ -41,7 +38,6 @@ st.markdown("""
         --accent-bg:        #F0F4F2;
     }
 
-    /* ─── Global Reset ─── */
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
         background-color: var(--bg-color);
@@ -55,7 +51,7 @@ st.markdown("""
 
     header, footer, [data-testid="stToolbar"] { display: none !important; }
 
-    /* ─── Masthead ─── */
+    /* Masthead */
     .masthead {
         padding: 40px 0 30px 0;
         display: flex;
@@ -63,7 +59,6 @@ st.markdown("""
         align-items: center;
         text-align: center;
     }
-
     .masthead-eyebrow {
         font-size: 12px;
         font-weight: 600;
@@ -71,11 +66,7 @@ st.markdown("""
         color: var(--text-muted);
         text-transform: uppercase;
         margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
     }
-
     .masthead-title {
         font-family: 'Cormorant Garamond', serif;
         font-size: 72px;
@@ -83,17 +74,13 @@ st.markdown("""
         color: var(--primary);
         letter-spacing: 4px;
         line-height: 1;
-        text-transform: uppercase;
         margin-bottom: 12px;
     }
-
     .masthead-tagline {
         font-size: 14px;
         color: var(--text-muted);
-        font-weight: 400;
         letter-spacing: 1px;
     }
-
     .masthead-status {
         margin-top: 16px;
         font-size: 11px;
@@ -101,15 +88,11 @@ st.markdown("""
         letter-spacing: 1px;
         color: var(--primary);
         background: var(--accent-bg);
-        text-transform: uppercase;
         padding: 6px 16px;
         border-radius: 20px;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
     }
 
-    /* ─── Tab Nav — Segmented Pills ─── */
+    /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
         background: transparent;
         gap: 12px;
@@ -123,12 +106,10 @@ st.markdown("""
         font-size: 13px;
         font-weight: 600;
         color: var(--text-muted);
-        letter-spacing: 0.5px;
         background: var(--card-bg);
         border: 1px solid var(--border-color);
         padding: 12px 24px;
         border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         transition: all 0.3s ease;
     }
     .stTabs [aria-selected="true"] {
@@ -139,30 +120,16 @@ st.markdown("""
     }
     .stTabs [data-baseweb="tab-highlight"] { display: none !important; }
 
-    /* ─── Cards — Modern Rounded ─── */
-    .journal-panel {
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 16px;
-        padding: 24px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-    }
-
+    /* Output Areas */
     .panel-heading {
         font-size: 12px;
         font-weight: 600;
         letter-spacing: 2px;
-        text-transform: uppercase;
         color: var(--text-main);
         padding-bottom: 12px;
         border-bottom: 1px solid var(--border-color);
         margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
     }
-
-    /* ─── Transcript / Output Area ─── */
     .transcript-well {
         background: #F8FAF9;
         border: 1px solid var(--border-color);
@@ -170,45 +137,33 @@ st.markdown("""
         padding: 20px;
         font-size: 14px;
         line-height: 1.8;
-        color: var(--text-main);
         height: 300px;
         overflow-y: auto;
     }
-
+    
+    /* --- THE CENTERING FIX IS HERE --- */
     .transcript-empty {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         height: 100%;
+        min-height: 200px;
+        text-align: center;
         color: var(--text-muted);
         font-size: 13px;
-        gap: 12px;
+        gap: 10px;
     }
 
-    /* ─── Buttons ─── */
+    /* Buttons & Inputs */
     .stButton > button {
         background: var(--primary) !important;
         color: #FFFFFF !important;
-        border: none !important;
         border-radius: 8px !important;
         font-size: 12px !important;
         font-weight: 600 !important;
-        letter-spacing: 1px !important;
         padding: 12px 24px !important;
-        width: auto !important;
-        transition: all 0.2s ease !important;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
     }
-    .stButton > button:hover {
-        background: var(--primary-light) !important;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(26, 67, 49, 0.2);
-    }
-
     .stDownloadButton > button {
         background: var(--card-bg) !important;
         color: var(--primary) !important;
@@ -216,28 +171,15 @@ st.markdown("""
         border-radius: 8px !important;
         font-size: 12px !important;
         font-weight: 600 !important;
-        letter-spacing: 1px !important;
         padding: 12px 24px !important;
         width: 100% !important;
-        transition: all 0.2s ease !important;
     }
-    .stDownloadButton > button:hover {
-        background: var(--accent-bg) !important;
-    }
-
-    /* ─── File Uploader ─── */
     [data-testid="stFileUploadDropzone"] {
         background: var(--accent-bg) !important;
         border: 2px dashed #CBD5E0 !important;
         border-radius: 12px !important;
         padding: 30px !important;
     }
-    [data-testid="stFileUploadDropzone"]:hover {
-        border-color: var(--primary) !important;
-        background: #E8F0EC !important;
-    }
-
-    /* ─── Metrics ─── */
     [data-testid="stMetricValue"] {
         font-size: 24px !important;
         font-weight: 600 !important;
@@ -245,55 +187,11 @@ st.markdown("""
     }
     [data-testid="stMetricLabel"] {
         font-size: 10px !important;
-        letter-spacing: 1px !important;
-        text-transform: uppercase !important;
         color: var(--text-muted) !important;
     }
-    [data-testid="stMetric"] {
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        padding: 12px 16px;
-        border-radius: 12px;
-    }
-
-    /* ─── Spinner ─── */
-    .stSpinner > div > div {
-        border-top-color: var(--primary) !important;
-    }
-
-    /* ─── Audio Player ─── */
-    audio {
-        width: 100%;
-        margin-top: 12px;
-        border-radius: 8px;
-    }
-
-    /* ─── Text Area ─── */
     .stTextArea textarea {
         background: #F8FAF9 !important;
-        border: 1px solid var(--border-color) !important;
         border-radius: 12px !important;
-        font-size: 14px !important;
-        color: var(--text-main) !important;
-        line-height: 1.8 !important;
-        padding: 16px !important;
-    }
-    .stTextArea textarea:focus {
-        border-color: var(--primary) !important;
-        box-shadow: 0 0 0 1px var(--primary) !important;
-    }
-
-    /* ─── Layout Tweaks ─── */
-    .block-container {
-        padding-top: 0 !important;
-        padding-bottom: 40px !important;
-        max-width: 1200px !important;
-    }
-
-    [data-testid="stImage"] img {
-        border-radius: 12px;
-        border: 1px solid var(--border-color);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -323,7 +221,7 @@ st.markdown("""
     <div class="masthead-eyebrow">🌿 ESTABLISHED 2026</div>
     <div class="masthead-title">READIFY_AI</div>
     <div class="masthead-tagline">Document Intelligence &nbsp;•&nbsp; Speech Synthesis &nbsp;•&nbsp; Image To Speech</div>
-    <div class="masthead-status">🪟 MADE USING MICROSOFT AZURE</div>
+    <div class="masthead-status"> MADE USING MICROSOFT AZURE</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -342,30 +240,16 @@ with t1:
 
     with col_in:
         st.markdown('<div class="panel-heading">☁️ UPLOAD DOCUMENT</div>', unsafe_allow_html=True)
-
-        image_file = st.file_uploader(
-            "Upload Target Document",
-            type=["png", "jpg", "jpeg"],
-            label_visibility="collapsed",
-            key="ocr_uploader"
-        )
+        image_file = st.file_uploader("Upload Target Document", type=["png", "jpg", "jpeg"], label_visibility="collapsed", key="ocr_uploader")
 
         if image_file:
             st.image(image_file, use_container_width=True)
-            st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
-
             m1, m2 = st.columns(2)
             m1.metric("Size", f"{image_file.size / 1024:.1f} KB")
             m2.metric("Format", image_file.type.split('/')[-1].upper())
-
-            st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
             execute_ocr = st.button("✨ EXTRACT TEXT")
         else:
-            st.markdown("""
-            <div style="padding:40px 0; text-align:center; color:#718096; font-size:14px;">
-                Drop your document here<br>to begin analysis
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown('<div style="padding:40px 0; text-align:center; color:#718096; font-size:14px;">Drop your document here<br>to begin analysis</div>', unsafe_allow_html=True)
 
     with col_out:
         st.markdown('<div class="panel-heading">📄 EXTRACTED TEXT</div>', unsafe_allow_html=True)
@@ -390,18 +274,20 @@ with t1:
 
                     full_text = "\n".join(lines)
                     st.markdown(f'<div class="transcript-well">{full_text}</div>', unsafe_allow_html=True)
-                    st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
                     st.download_button("📥 Export as .txt", full_text, file_name="ocr.txt", key="ocr_download")
 
                 except Exception as e:
                     st.error(f"Extraction error: {e}")
         else:
+            # Fixed HTML structure for centering
             st.markdown("""
-            <div class="transcript-well" style="display:flex;">
+            <div class="transcript-well">
                 <div class="transcript-empty">
                     <span style="font-size:32px; color:#CBD5E0;">📄</span>
-                    Awaiting document ingestion...<br>
-                    <span style="font-size:12px; color:#A0AEC0;">Once processed, the extracted text will appear here.</span>
+                    <div>
+                        Awaiting document ingestion...<br>
+                        <span style="font-size:12px; color:#A0AEC0;">Once processed, the extracted text will appear here.</span>
+                    </div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -414,13 +300,7 @@ with t2:
 
     with col_text:
         st.markdown('<div class="panel-heading">✍️ SCRIPT INPUT</div>', unsafe_allow_html=True)
-
-        user_script = st.text_area(
-            "Enter text:",
-            height=220,
-            label_visibility="collapsed",
-            placeholder="Compose your script here…"
-        )
+        user_script = st.text_area("Enter text:", height=220, label_visibility="collapsed", placeholder="Compose your script here…")
         st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
         generate_voice = st.button("🪄 SYNTHESISE VOICE")
 
@@ -432,30 +312,25 @@ with t2:
                 try:
                     speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
                     speech_config.speech_synthesis_voice_name = "en-US-ChristopherNeural"
-
-                    out_file     = "voice.wav"
+                    out_file = "voice.wav"
                     audio_config = speechsdk.audio.AudioOutputConfig(filename=out_file)
-                    synthesizer  = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
+                    synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
                     synthesizer.speak_text_async(user_script).get()
-
                     audio_data = open(out_file, "rb").read()
-
                     st.success("Voice synthesised successfully.")
                     st.audio(audio_data, format="audio/wav")
-                    st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
                     st.download_button("📥 Download Audio (.wav)", audio_data, file_name=out_file, key="tts_download")
-
                 except Exception as e:
                     st.error(f"Synthesis error: {e}")
-
         elif generate_voice:
             st.warning("Please enter a script before synthesising.")
         else:
+            # Fixed HTML structure for centering
             st.markdown("""
-            <div class="transcript-well" style="height:220px; display:flex;">
+            <div class="transcript-well" style="height:220px;">
                 <div class="transcript-empty">
                     <span style="font-size:32px; color:#CBD5E0;">🎙️</span>
-                    Awaiting script input...
+                    <div>Awaiting script input...</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -468,30 +343,16 @@ with t3:
 
     with col_in3:
         st.markdown('<div class="panel-heading">☁️ UPLOAD DOCUMENT FOR READING</div>', unsafe_allow_html=True)
-
-        image_file_t3 = st.file_uploader(
-            "Upload Target Document",
-            type=["png", "jpg", "jpeg"],
-            label_visibility="collapsed",
-            key="img_to_speech_uploader"
-        )
+        image_file_t3 = st.file_uploader("Upload Target Document", type=["png", "jpg", "jpeg"], label_visibility="collapsed", key="img_to_speech_uploader")
 
         if image_file_t3:
             st.image(image_file_t3, use_container_width=True)
-            st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
-
             m1_t3, m2_t3 = st.columns(2)
             m1_t3.metric("Size", f"{image_file_t3.size / 1024:.1f} KB")
             m2_t3.metric("Format", image_file_t3.type.split('/')[-1].upper())
-
-            st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
             execute_img_to_speech = st.button("🔊 READ DOCUMENT ALOUD")
         else:
-            st.markdown("""
-            <div style="padding:40px 0; text-align:center; color:#718096; font-size:14px;">
-                Drop your document here<br>to convert directly to voice
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown('<div style="padding:40px 0; text-align:center; color:#718096; font-size:14px;">Drop your document here<br>to convert directly to voice</div>', unsafe_allow_html=True)
 
     with col_out3:
         st.markdown('<div class="panel-heading">⚙️ PROCESSED OUTPUT</div>', unsafe_allow_html=True)
@@ -499,9 +360,8 @@ with t3:
         if image_file_t3 and 'execute_img_to_speech' in locals() and execute_img_to_speech:
             with st.spinner("Extracting text and synthesising voice..."):
                 try:
-                    # --- STEP 1: OCR ---
                     response = vision_client.read_in_stream(io.BytesIO(image_file_t3.read()), raw=True)
-                    op_id    = response.headers["Operation-Location"].split("/")[-1]
+                    op_id = response.headers["Operation-Location"].split("/")[-1]
 
                     while True:
                         result = vision_client.get_read_result(op_id)
@@ -520,34 +380,29 @@ with t3:
                     if not extracted_text.strip():
                         st.warning("No text was found in the uploaded image.")
                     else:
-                        # Display Text
                         st.markdown(f'<div class="transcript-well" style="height:200px;">{extracted_text}</div>', unsafe_allow_html=True)
-                        st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
-
-                        # --- STEP 2: TTS ---
+                        
                         speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
                         speech_config.speech_synthesis_voice_name = "en-US-ChristopherNeural"
-
-                        out_file_t3     = "vision_to_voice.wav"
+                        out_file_t3 = "vision_to_voice.wav"
                         audio_config_t3 = speechsdk.audio.AudioOutputConfig(filename=out_file_t3)
-                        synthesizer_t3  = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config_t3)
+                        synthesizer_t3 = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config_t3)
                         synthesizer_t3.speak_text_async(extracted_text).get()
-
+                        
                         audio_data_t3 = open(out_file_t3, "rb").read()
-
                         st.success("Voice synthesised successfully from document.")
                         st.audio(audio_data_t3, format="audio/wav")
-                        st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
                         st.download_button("📥 Download Audio (.wav)", audio_data_t3, file_name=out_file_t3, key="img2speech_download")
 
                 except Exception as e:
                     st.error(f"Processing error: {e}")
         else:
+            # Fixed HTML structure for centering
             st.markdown("""
-            <div class="transcript-well" style="display:flex;">
+            <div class="transcript-well">
                 <div class="transcript-empty">
                     <span style="font-size:32px; color:#CBD5E0;">⚙️</span>
-                    Awaiting document ingestion...
+                    <div>Awaiting document ingestion...</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
