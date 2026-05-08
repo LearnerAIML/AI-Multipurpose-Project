@@ -361,7 +361,7 @@ except Exception:
 # =========================================================
 st.markdown("""
 <div class="masthead">
-    <div class="masthead-eyebrow">Cognitive Intelligence · Established 2026</div>
+    <div class="masthead-eyebrow">Established 2026</div>
     <div class="masthead-title">Readify_AI</div>
     <div class="masthead-rule-row">
         <hr/>
@@ -369,7 +369,7 @@ st.markdown("""
         <hr/>
     </div>
     <div class="masthead-tagline">Document Intelligence &nbsp;·&nbsp; Acoustic Analysis &nbsp;·&nbsp; Speech Synthesis</div>
-    <div class="masthead-status">● Azure uplink verified</div>
+    <div class="masthead-status">Made using Microsoft Azure</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -387,7 +387,6 @@ with t1:
     col_in, col_out = st.columns([1, 1.5], gap="large")
 
     with col_in:
-        st.markdown('<div class="journal-panel">', unsafe_allow_html=True)
         st.markdown('<div class="panel-heading">◈ &nbsp; Upload Document</div>', unsafe_allow_html=True)
 
         image_file = st.file_uploader(
@@ -416,7 +415,6 @@ with t1:
         st.markdown('</div>', unsafe_allow_html=True)
 
     with col_out:
-        st.markdown('<div class="journal-panel">', unsafe_allow_html=True)
         st.markdown('<div class="panel-heading">◈ &nbsp; Extracted Text</div>', unsafe_allow_html=True)
 
         if image_file and 'execute_ocr' in locals() and execute_ocr:
@@ -457,7 +455,6 @@ with t1:
 # MODULE 2 — ACOUSTIC ANALYSIS (STT)
 # =========================================================
 with t2:
-    st.markdown('<div class="journal-panel">', unsafe_allow_html=True)
     st.markdown('<div class="panel-heading">◈ &nbsp; Audio Transcription</div>', unsafe_allow_html=True)
 
     audio_file = st.file_uploader(
@@ -513,7 +510,6 @@ with t3:
     col_text, col_audio = st.columns([1.4, 1], gap="large")
 
     with col_text:
-        st.markdown('<div class="journal-panel">', unsafe_allow_html=True)
         st.markdown('<div class="panel-heading">◈ &nbsp; Script Input</div>', unsafe_allow_html=True)
 
         user_script = st.text_area(
@@ -528,7 +524,6 @@ with t3:
         st.markdown('</div>', unsafe_allow_html=True)
 
     with col_audio:
-        st.markdown('<div class="journal-panel">', unsafe_allow_html=True)
         st.markdown('<div class="panel-heading">◈ &nbsp; Audio Output</div>', unsafe_allow_html=True)
 
         if generate_voice and user_script.strip():
