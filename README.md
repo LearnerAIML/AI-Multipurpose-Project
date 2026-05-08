@@ -15,5 +15,3 @@ The application is divided into three easy-to-use modules:
 ## Usage
 To use the project, visit https://readifyai.streamlit.app/ url.
 
-```bash
-pip install streamlit pillow azure-cognitiveservices-vision-computervision msrest azure-cognitiveservices-speech
