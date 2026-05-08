@@ -43,8 +43,8 @@ except Exception:
 # MASTHEAD
 # =========================================================
 st.markdown("""
-""")
 st.markdown("", unsafe_allow_html=True)
+""")
 
 # =========================================================
 # TABS
@@ -91,13 +91,14 @@ with t1:
                                 lines.append(line.text)
 
                     full_text = "\n".join(lines)
-                    # Added style="color: black;" for output visibility
+                    # Added 'color: black;' to make the output visible
                     st.markdown(f'<div class="transcript-well" style="color: black;">{full_text}</div>', unsafe_allow_html=True)
                     st.download_button("📥 Export as .txt", full_text, file_name="ocr.txt", key="ocr_download")
 
                 except Exception as e:
                     st.error(f"Extraction error: {e}")
         else:
+            # Fixed HTML structure for centering
             st.markdown("""
             <div class="transcript-well">
                 <div class="transcript-empty">
@@ -118,11 +119,11 @@ with t2:
     with col_text:
         st.markdown('<div class="panel-heading">✍️ SCRIPT INPUT</div>', unsafe_allow_html=True)
         user_script = st.text_area("Enter text:", height=220, label_visibility="collapsed", placeholder="Compose your script here…")
-        
-        # Added Voice Selection Toggle
-        voice_choice_t2 = st.radio("Select Voice:", ["Male", "Female"], horizontal=True, key="tts_voice")
-        
         st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+        
+        # Added Voice Selection Option
+        voice_gender = st.radio("Select Voice:", ["Male", "Female"], horizontal=True, key="tts_voice_selection")
+        
         generate_voice = st.button("🪄 SYNTHESISE VOICE")
 
     with col_audio:
@@ -133,8 +134,9 @@ with t2:
                 try:
                     speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
                     
-                    # Dynamically set voice based on selection
-                    speech_config.speech_synthesis_voice_name = "en-US-ChristopherNeural" if voice_choice_t2 == "Male" else "en-US-JennyNeural"
+                    # Apply selected voice based on radio button
+                    selected_voice = "en-US-ChristopherNeural" if voice_gender == "Male" else "en-US-JennyNeural"
+                    speech_config.speech_synthesis_voice_name = selected_voice
                     
                     out_file = "voice.wav"
                     audio_config = speechsdk.audio.AudioOutputConfig(filename=out_file)
@@ -149,6 +151,7 @@ with t2:
         elif generate_voice:
             st.warning("Please enter a script before synthesising.")
         else:
+            # Fixed HTML structure for centering
             st.markdown("""
             <div class="transcript-well" style="height:220px;">
                 <div class="transcript-empty">
@@ -173,8 +176,8 @@ with t3:
             m1_t3.metric("Size", f"{image_file_t3.size / 1024:.1f} KB")
             m2_t3.metric("Format", image_file_t3.type.split('/')[-1].upper())
             
-            # Added Voice Selection Toggle
-            voice_choice_t3 = st.radio("Select Voice:", ["Male", "Female"], horizontal=True, key="img2speech_voice")
+            # Added Voice Selection Option
+            voice_gender_t3 = st.radio("Select Voice:", ["Male", "Female"], horizontal=True, key="img2speech_voice_selection")
             
             execute_img_to_speech = st.button("🔊 READ DOCUMENT ALOUD")
         else:
@@ -206,13 +209,14 @@ with t3:
                     if not extracted_text.strip():
                         st.warning("No text was found in the uploaded image.")
                     else:
-                        # Added style="color: black;" for output visibility
+                        # Added 'color: black;' to make the output visible
                         st.markdown(f'<div class="transcript-well" style="height:200px; color: black;">{extracted_text}</div>', unsafe_allow_html=True)
                         
                         speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
                         
-                        # Dynamically set voice based on selection
-                        speech_config.speech_synthesis_voice_name = "en-US-ChristopherNeural" if voice_choice_t3 == "Male" else "en-US-JennyNeural"
+                        # Apply selected voice based on radio button
+                        selected_voice_t3 = "en-US-ChristopherNeural" if voice_gender_t3 == "Male" else "en-US-JennyNeural"
+                        speech_config.speech_synthesis_voice_name = selected_voice_t3
                         
                         out_file_t3 = "vision_to_voice.wav"
                         audio_config_t3 = speechsdk.audio.AudioOutputConfig(filename=out_file_t3)
@@ -227,6 +231,7 @@ with t3:
                 except Exception as e:
                     st.error(f"Processing error: {e}")
         else:
+            # Fixed HTML structure for centering
             st.markdown("""
             <div class="transcript-well">
                 <div class="transcript-empty">
