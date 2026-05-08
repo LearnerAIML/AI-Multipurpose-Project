@@ -21,48 +21,35 @@ st.set_page_config(
 )
 
 # =========================================================
-# EDITORIAL JOURNAL AESTHETIC
-# Palette: Warm Cream · Forest Green · Aged Ink · Rose Dust
-# Typography: Cormorant Garamond (display) + DM Mono (body)
+# MODERN CLOUD AESTHETIC
+# Palette: Soft Mint, Deep Forest Green, Clean White
+# Typography: Cormorant Garamond (display) + Inter (body)
 # =========================================================
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Literata:ital,wght@0,300;0,400;1,300&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600&display=swap');
 
     /* ─── Root Tokens ─── */
     :root {
-        --cream:        #F5F0E8;
-        --cream-dark:   #EDE8DC;
-        --ink:          #1C1A16;
-        --ink-light:    #3D3A34;
-        --forest:       #2D4A3E;
-        --forest-light: #3D6B5A;
-        --forest-muted: #5A8A75;
-        --rose:         #C4857A;
-        --rose-light:   #D9A89F;
-        --gold:         #B8A070;
-        --gold-light:   #D4BC94;
-        --rule:         #C8C0B0;
-        --rule-light:   #DDD8CC;
+        --bg-color:         #F4F7F5;
+        --card-bg:          #FFFFFF;
+        --primary:          #1A4331;
+        --primary-light:    #2A5A44;
+        --text-main:        #2D3748;
+        --text-muted:       #718096;
+        --border-color:     #E2E8F0;
+        --accent-bg:        #F0F4F2;
     }
 
     /* ─── Global Reset ─── */
     html, body, [class*="css"] {
-        font-family: 'DM Mono', monospace;
-        background-color: var(--cream);
-        color: var(--ink);
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
     }
 
     .stApp {
-        background-color: var(--cream);
-        background-image:
-            repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 39px,
-                var(--rule-light) 39px,
-                var(--rule-light) 40px
-            );
+        background: radial-gradient(circle at top left, #FFFFFF 0%, #F4F7F5 100%);
         min-height: 100vh;
     }
 
@@ -70,271 +57,243 @@ st.markdown("""
 
     /* ─── Masthead ─── */
     .masthead {
-        border-top: 3px solid var(--ink);
-        border-bottom: 1px solid var(--rule);
-        padding: 28px 0 20px 0;
-        margin-bottom: 0;
+        padding: 40px 0 30px 0;
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
     }
 
     .masthead-eyebrow {
-        font-family: 'DM Mono', monospace;
-        font-size: 10px;
-        font-weight: 500;
-        letter-spacing: 5px;
-        color: var(--forest-muted);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 4px;
+        color: var(--text-muted);
         text-transform: uppercase;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
     .masthead-title {
         font-family: 'Cormorant Garamond', serif;
-        font-size: 80px;
-        font-weight: 300;
-        color: var(--ink);
-        letter-spacing: 8px;
+        font-size: 72px;
+        font-weight: 600;
+        color: var(--primary);
+        letter-spacing: 4px;
         line-height: 1;
         text-transform: uppercase;
-        margin-bottom: 6px;
-    }
-
-    .masthead-rule-row {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        width: 100%;
-        max-width: 600px;
-        margin: 10px 0 6px 0;
-    }
-    .masthead-rule-row hr {
-        flex: 1;
-        border: none;
-        border-top: 1px solid var(--rule);
-        margin: 0;
-    }
-    .masthead-diamond {
-        color: var(--forest);
-        font-size: 12px;
+        margin-bottom: 12px;
     }
 
     .masthead-tagline {
-        font-family: 'Literata', serif;
-        font-size: 13px;
-        font-style: italic;
-        color: var(--ink-light);
+        font-size: 14px;
+        color: var(--text-muted);
+        font-weight: 400;
         letter-spacing: 1px;
     }
 
     .masthead-status {
-        margin-top: 12px;
-        font-family: 'DM Mono', monospace;
-        font-size: 9px;
-        letter-spacing: 3px;
-        color: var(--forest);
+        margin-top: 16px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: var(--primary);
+        background: var(--accent-bg);
         text-transform: uppercase;
-        padding: 4px 14px;
-        border: 1px solid var(--forest-muted);
-        border-radius: 0;
+        padding: 6px 16px;
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
     }
 
-    /* ─── Section Divider ─── */
-    .section-divider {
-        border: none;
-        border-top: 1px solid var(--rule);
-        margin: 0;
-    }
-
-    /* ─── Tab Nav — Newspaper section headers ─── */
+    /* ─── Tab Nav — Segmented Pills ─── */
     .stTabs [data-baseweb="tab-list"] {
         background: transparent;
-        border-bottom: 2px solid var(--ink);
-        gap: 0;
-        justify-content: flex-start;
+        gap: 12px;
+        justify-content: center;
         padding: 0;
-        margin: 0 0 32px 0;
+        margin: 0 0 24px 0;
+        border: none;
     }
     .stTabs [data-baseweb="tab"] {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 16px;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
         font-weight: 600;
-        color: var(--ink-light);
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        border: none;
-        border-right: 1px solid var(--rule);
-        padding: 12px 28px;
-        background: transparent;
-        height: auto;
-        border-radius: 0;
-    }
-    .stTabs [data-baseweb="tab"]:first-child {
-        border-left: 1px solid var(--rule);
+        color: var(--text-muted);
+        letter-spacing: 0.5px;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        padding: 12px 24px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        transition: all 0.3s ease;
     }
     .stTabs [aria-selected="true"] {
-        background: var(--forest) !important;
-        color: var(--cream) !important;
-        border-color: var(--forest) !important;
+        background: var(--primary) !important;
+        color: #FFFFFF !important;
+        border-color: var(--primary) !important;
+        box-shadow: 0 4px 12px rgba(26, 67, 49, 0.2);
     }
     .stTabs [data-baseweb="tab-highlight"] { display: none !important; }
 
-    /* ─── Cards — Archival Document Style ─── */
+    /* ─── Cards — Modern Rounded ─── */
     .journal-panel {
-        background: var(--cream);
-        border: 1px solid var(--rule);
-        border-top: 3px solid var(--forest);
-        padding: 28px 28px 24px 28px;
-        position: relative;
-    }
-
-    .journal-panel::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 3px;
-        background: var(--forest);
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     }
 
     .panel-heading {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 600;
-        letter-spacing: 4px;
+        letter-spacing: 2px;
         text-transform: uppercase;
-        color: var(--forest);
-        padding-bottom: 10px;
-        border-bottom: 1px solid var(--rule-light);
+        color: var(--text-main);
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
         margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
     /* ─── Transcript / Output Area ─── */
     .transcript-well {
-        background: #FDFAF5;
-        border: 1px solid var(--rule);
-        border-left: 4px solid var(--forest);
-        padding: 22px 24px;
-        font-family: 'Literata', serif;
+        background: #F8FAF9;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 20px;
         font-size: 14px;
-        line-height: 1.9;
-        color: var(--ink);
+        line-height: 1.8;
+        color: var(--text-main);
         height: 300px;
         overflow-y: auto;
     }
 
     .transcript-empty {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         height: 100%;
-        font-family: 'Literata', serif;
-        font-style: italic;
-        font-size: 14px;
-        color: var(--rule);
+        color: var(--text-muted);
+        font-size: 13px;
+        gap: 12px;
     }
 
     /* ─── Buttons ─── */
     .stButton > button {
-        background: var(--forest) !important;
-        color: var(--cream) !important;
+        background: var(--primary) !important;
+        color: #FFFFFF !important;
         border: none !important;
-        border-radius: 0 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 10px !important;
-        font-weight: 500 !important;
-        letter-spacing: 3px !important;
-        text-transform: uppercase !important;
-        padding: 14px 0 !important;
-        width: 100% !important;
-        transition: background 0.2s ease, color 0.2s ease !important;
+        border-radius: 8px !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        letter-spacing: 1px !important;
+        padding: 12px 24px !important;
+        width: auto !important;
+        transition: all 0.2s ease !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
     }
     .stButton > button:hover {
-        background: var(--ink) !important;
-        color: var(--cream) !important;
+        background: var(--primary-light) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(26, 67, 49, 0.2);
     }
 
     .stDownloadButton > button {
-        background: transparent !important;
-        color: var(--forest) !important;
-        border: 1px solid var(--forest) !important;
-        border-radius: 0 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 10px !important;
-        font-weight: 500 !important;
-        letter-spacing: 3px !important;
-        text-transform: uppercase !important;
-        padding: 12px 0 !important;
+        background: var(--card-bg) !important;
+        color: var(--primary) !important;
+        border: 1px solid var(--primary) !important;
+        border-radius: 8px !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        letter-spacing: 1px !important;
+        padding: 12px 24px !important;
         width: 100% !important;
         transition: all 0.2s ease !important;
     }
     .stDownloadButton > button:hover {
-        background: var(--forest) !important;
-        color: var(--cream) !important;
+        background: var(--accent-bg) !important;
     }
 
     /* ─── File Uploader ─── */
     [data-testid="stFileUploadDropzone"] {
-        background: #FDFAF5 !important;
-        border: 1px dashed var(--rule) !important;
-        border-radius: 0 !important;
+        background: var(--accent-bg) !important;
+        border: 2px dashed #CBD5E0 !important;
+        border-radius: 12px !important;
+        padding: 30px !important;
     }
     [data-testid="stFileUploadDropzone"]:hover {
-        border-color: var(--forest-muted) !important;
-        background: #F8F4EC !important;
+        border-color: var(--primary) !important;
+        background: #E8F0EC !important;
     }
 
     /* ─── Metrics ─── */
     [data-testid="stMetricValue"] {
-        font-family: 'Cormorant Garamond', serif !important;
-        font-size: 28px !important;
+        font-size: 24px !important;
         font-weight: 600 !important;
-        color: var(--forest) !important;
+        color: var(--primary) !important;
     }
     [data-testid="stMetricLabel"] {
-        font-family: 'DM Mono', monospace !important;
-        font-size: 9px !important;
-        letter-spacing: 3px !important;
+        font-size: 10px !important;
+        letter-spacing: 1px !important;
         text-transform: uppercase !important;
-        color: var(--ink-light) !important;
+        color: var(--text-muted) !important;
+    }
+    [data-testid="stMetric"] {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        padding: 12px 16px;
+        border-radius: 12px;
     }
 
     /* ─── Spinner ─── */
     .stSpinner > div > div {
-        border-top-color: var(--forest) !important;
+        border-top-color: var(--primary) !important;
     }
 
     /* ─── Audio Player ─── */
     audio {
         width: 100%;
         margin-top: 12px;
-        filter: sepia(0.3);
+        border-radius: 8px;
     }
 
     /* ─── Text Area ─── */
     .stTextArea textarea {
-        background: #FDFAF5 !important;
-        border: 1px solid var(--rule) !important;
-        border-radius: 0 !important;
-        font-family: 'Literata', serif !important;
+        background: #F8FAF9 !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 12px !important;
         font-size: 14px !important;
-        color: var(--ink) !important;
+        color: var(--text-main) !important;
         line-height: 1.8 !important;
+        padding: 16px !important;
     }
     .stTextArea textarea:focus {
-        border-color: var(--forest) !important;
-        box-shadow: none !important;
+        border-color: var(--primary) !important;
+        box-shadow: 0 0 0 1px var(--primary) !important;
     }
 
-    /* ─── Column gap fine-tuning ─── */
+    /* ─── Layout Tweaks ─── */
     .block-container {
         padding-top: 0 !important;
         padding-bottom: 40px !important;
         max-width: 1200px !important;
     }
 
-    /* ─── Image rounded slightly ─── */
     [data-testid="stImage"] img {
-        border: 1px solid var(--rule);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -361,24 +320,19 @@ except Exception:
 # =========================================================
 st.markdown("""
 <div class="masthead">
-    <div class="masthead-eyebrow">Established 2026</div>
-    <div class="masthead-title">Readify_AI</div>
-    <div class="masthead-rule-row">
-        <hr/>
-        <span class="masthead-diamond">◈</span>
-        <hr/>
-    </div>
-    <div class="masthead-tagline">Document Intelligence &nbsp;·&nbsp; Speech Synthesis &nbsp;·&nbsp; Image To Speech</div>
-    <div class="masthead-status">Made using Microsoft Azure</div>
+    <div class="masthead-eyebrow">🌿 ESTABLISHED 2026</div>
+    <div class="masthead-title">READIFY_AI</div>
+    <div class="masthead-tagline">Document Intelligence &nbsp;•&nbsp; Speech Synthesis &nbsp;•&nbsp; Image To Speech</div>
+    <div class="masthead-status">🪟 MADE USING MICROSOFT AZURE</div>
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("<div style='height:32px'></div>", unsafe_allow_html=True)
+st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
 # =========================================================
 # TABS
 # =========================================================
-t1, t2, t3 = st.tabs(["I. Document Intelligence", "II. Speech Synthesis", "III. Image to Speech"])
+t1, t2, t3 = st.tabs(["📄 I. DOCUMENT INTELLIGENCE", "🎙️ II. SPEECH SYNTHESIS", "🔊 III. IMAGE TO SPEECH"])
 
 # =========================================================
 # MODULE 1 — DOCUMENT INTELLIGENCE (OCR)
@@ -387,7 +341,7 @@ with t1:
     col_in, col_out = st.columns([1, 1.5], gap="large")
 
     with col_in:
-        st.markdown('<div class="panel-heading">◈ &nbsp; Upload Document</div>', unsafe_allow_html=True)
+        st.markdown('<div class="panel-heading">☁️ UPLOAD DOCUMENT</div>', unsafe_allow_html=True)
 
         image_file = st.file_uploader(
             "Upload Target Document",
@@ -405,18 +359,16 @@ with t1:
             m2.metric("Format", image_file.type.split('/')[-1].upper())
 
             st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
-            execute_ocr = st.button("Extract Text")
+            execute_ocr = st.button("✨ EXTRACT TEXT")
         else:
             st.markdown("""
-            <div style="padding:40px 0; text-align:center; color:#C8C0B0; font-family:'Literata',serif; font-style:italic; font-size:13px;">
+            <div style="padding:40px 0; text-align:center; color:#718096; font-size:14px;">
                 Drop your document here<br>to begin analysis
             </div>
             """, unsafe_allow_html=True)
 
-        st.markdown('</div>', unsafe_allow_html=True)
-
     with col_out:
-        st.markdown('<div class="panel-heading">◈ &nbsp; Extracted Text</div>', unsafe_allow_html=True)
+        st.markdown('<div class="panel-heading">📄 EXTRACTED TEXT</div>', unsafe_allow_html=True)
 
         if image_file and 'execute_ocr' in locals() and execute_ocr:
             with st.spinner("Analysing document..."):
@@ -439,18 +391,20 @@ with t1:
                     full_text = "\n".join(lines)
                     st.markdown(f'<div class="transcript-well">{full_text}</div>', unsafe_allow_html=True)
                     st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
-                    st.download_button("Export as .txt", full_text, file_name="ocr.txt", key="ocr_download")
+                    st.download_button("📥 Export as .txt", full_text, file_name="ocr.txt", key="ocr_download")
 
                 except Exception as e:
                     st.error(f"Extraction error: {e}")
         else:
             st.markdown("""
-            <div class="transcript-well">
-                <div class="transcript-empty">Awaiting document ingestion…</div>
+            <div class="transcript-well" style="display:flex;">
+                <div class="transcript-empty">
+                    <span style="font-size:32px; color:#CBD5E0;">📄</span>
+                    Awaiting document ingestion...<br>
+                    <span style="font-size:12px; color:#A0AEC0;">Once processed, the extracted text will appear here.</span>
+                </div>
             </div>
             """, unsafe_allow_html=True)
-
-        st.markdown('</div>', unsafe_allow_html=True)
 
 # =========================================================
 # MODULE 2 — SPEECH SYNTHESIS (TTS)
@@ -459,7 +413,7 @@ with t2:
     col_text, col_audio = st.columns([1.4, 1], gap="large")
 
     with col_text:
-        st.markdown('<div class="panel-heading">◈ &nbsp; Script Input</div>', unsafe_allow_html=True)
+        st.markdown('<div class="panel-heading">✍️ SCRIPT INPUT</div>', unsafe_allow_html=True)
 
         user_script = st.text_area(
             "Enter text:",
@@ -468,12 +422,10 @@ with t2:
             placeholder="Compose your script here…"
         )
         st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
-        generate_voice = st.button("Synthesise Voice")
-
-        st.markdown('</div>', unsafe_allow_html=True)
+        generate_voice = st.button("🪄 SYNTHESISE VOICE")
 
     with col_audio:
-        st.markdown('<div class="panel-heading">◈ &nbsp; Audio Output</div>', unsafe_allow_html=True)
+        st.markdown('<div class="panel-heading">🎧 AUDIO OUTPUT</div>', unsafe_allow_html=True)
 
         if generate_voice and user_script.strip():
             with st.spinner("Synthesising voice..."):
@@ -491,7 +443,7 @@ with t2:
                     st.success("Voice synthesised successfully.")
                     st.audio(audio_data, format="audio/wav")
                     st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
-                    st.download_button("Download Audio (.wav)", audio_data, file_name=out_file, key="tts_download")
+                    st.download_button("📥 Download Audio (.wav)", audio_data, file_name=out_file, key="tts_download")
 
                 except Exception as e:
                     st.error(f"Synthesis error: {e}")
@@ -500,12 +452,13 @@ with t2:
             st.warning("Please enter a script before synthesising.")
         else:
             st.markdown("""
-            <div class="transcript-well" style="height:220px;">
-                <div class="transcript-empty">Awaiting script input…</div>
+            <div class="transcript-well" style="height:220px; display:flex;">
+                <div class="transcript-empty">
+                    <span style="font-size:32px; color:#CBD5E0;">🎙️</span>
+                    Awaiting script input...
+                </div>
             </div>
             """, unsafe_allow_html=True)
-
-        st.markdown('</div>', unsafe_allow_html=True)
 
 # =========================================================
 # MODULE 3 — IMAGE TO SPEECH (OCR + TTS)
@@ -514,7 +467,7 @@ with t3:
     col_in3, col_out3 = st.columns([1, 1.5], gap="large")
 
     with col_in3:
-        st.markdown('<div class="panel-heading">◈ &nbsp; Upload Document For Reading</div>', unsafe_allow_html=True)
+        st.markdown('<div class="panel-heading">☁️ UPLOAD DOCUMENT FOR READING</div>', unsafe_allow_html=True)
 
         image_file_t3 = st.file_uploader(
             "Upload Target Document",
@@ -532,16 +485,16 @@ with t3:
             m2_t3.metric("Format", image_file_t3.type.split('/')[-1].upper())
 
             st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
-            execute_img_to_speech = st.button("Read Document Aloud")
+            execute_img_to_speech = st.button("🔊 READ DOCUMENT ALOUD")
         else:
             st.markdown("""
-            <div style="padding:40px 0; text-align:center; color:#C8C0B0; font-family:'Literata',serif; font-style:italic; font-size:13px;">
+            <div style="padding:40px 0; text-align:center; color:#718096; font-size:14px;">
                 Drop your document here<br>to convert directly to voice
             </div>
             """, unsafe_allow_html=True)
 
     with col_out3:
-        st.markdown('<div class="panel-heading">◈ &nbsp; Processed Output</div>', unsafe_allow_html=True)
+        st.markdown('<div class="panel-heading">⚙️ PROCESSED OUTPUT</div>', unsafe_allow_html=True)
 
         if image_file_t3 and 'execute_img_to_speech' in locals() and execute_img_to_speech:
             with st.spinner("Extracting text and synthesising voice..."):
@@ -585,13 +538,50 @@ with t3:
                         st.success("Voice synthesised successfully from document.")
                         st.audio(audio_data_t3, format="audio/wav")
                         st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
-                        st.download_button("Download Audio (.wav)", audio_data_t3, file_name=out_file_t3, key="img2speech_download")
+                        st.download_button("📥 Download Audio (.wav)", audio_data_t3, file_name=out_file_t3, key="img2speech_download")
 
                 except Exception as e:
                     st.error(f"Processing error: {e}")
         else:
             st.markdown("""
-            <div class="transcript-well">
-                <div class="transcript-empty">Awaiting document ingestion…</div>
+            <div class="transcript-well" style="display:flex;">
+                <div class="transcript-empty">
+                    <span style="font-size:32px; color:#CBD5E0;">⚙️</span>
+                    Awaiting document ingestion...
+                </div>
             </div>
             """, unsafe_allow_html=True)
+
+# =========================================================
+# FOOTER
+# =========================================================
+st.markdown("""
+<div style="margin-top: 60px; padding: 30px 0; border-top: 1px solid #E2E8F0; text-align: center;">
+    <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 20px; color: #718096; font-size: 12px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 16px;">🤖</span> 
+            <div style="text-align: left;">
+                <strong>AI POWERED</strong><br>Advanced Azure AI models
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 16px;">🔒</span> 
+            <div style="text-align: left;">
+                <strong>SECURE & PRIVATE</strong><br>Your data is encrypted
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 16px;">⚡</span> 
+            <div style="text-align: left;">
+                <strong>FAST PROCESSING</strong><br>Optimized for speed
+            </div>
+        </div>
+    </div>
+    <div style="color: #2D3748; font-size: 14px; font-weight: 500;">
+        Made with ❤️ by Varad Petare
+    </div>
+    <div style="color: #A0AEC0; font-size: 11px; margin-top: 6px;">
+        © 2026 READIFY_AI. All rights reserved.
+    </div>
+</div>
+""", unsafe_allow_html=True)
