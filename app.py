@@ -361,7 +361,7 @@ except Exception:
 # =========================================================
 st.markdown("""
 <div class="masthead">
-    <div class="masthead-eyebrow">Cognitive Intelligence · Established 2024</div>
+    <div class="masthead-eyebrow">Cognitive Intelligence · Established 2026</div>
     <div class="masthead-title">Readify_AI</div>
     <div class="masthead-rule-row">
         <hr/>
@@ -392,7 +392,7 @@ with t1:
 
         image_file = st.file_uploader(
             "Upload Target Document",
-            type=["png", "jpg", "jpeg", "bmp"],
+            type=["png", "jpg", "jpeg"],
             label_visibility="collapsed"
         )
 
