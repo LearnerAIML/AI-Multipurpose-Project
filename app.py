@@ -15,14 +15,13 @@ import azure.cognitiveservices.speech as speechsdk
 # PAGE CONFIGURATION
 # =========================================================
 st.set_page_config(
-    page_title="Meridian",
-    page_icon="◈",
+    page_title="Readify AI",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
 # =========================================================
-# MERIDIAN — EDITORIAL JOURNAL AESTHETIC
+# EDITORIAL JOURNAL AESTHETIC
 # Palette: Warm Cream · Forest Green · Aged Ink · Rose Dust
 # Typography: Cormorant Garamond (display) + DM Mono (body)
 # =========================================================
@@ -70,7 +69,7 @@ st.markdown("""
     header, footer, [data-testid="stToolbar"] { display: none !important; }
 
     /* ─── Masthead ─── */
-    .meridian-masthead {
+    .masthead {
         border-top: 3px solid var(--ink);
         border-bottom: 1px solid var(--rule);
         padding: 28px 0 20px 0;
@@ -361,9 +360,9 @@ except Exception:
 # MASTHEAD
 # =========================================================
 st.markdown("""
-<div class="meridian-masthead">
+<div class="masthead">
     <div class="masthead-eyebrow">Cognitive Intelligence · Established 2024</div>
-    <div class="masthead-title">Meridian</div>
+    <div class="masthead-title">Readify_AI</div>
     <div class="masthead-rule-row">
         <hr/>
         <span class="masthead-diamond">◈</span>
@@ -379,7 +378,7 @@ st.markdown("<div style='height:32px'></div>", unsafe_allow_html=True)
 # =========================================================
 # TABS
 # =========================================================
-t1, t2, t3 = st.tabs(["§ I. Document Intelligence", "§ II. Acoustic Analysis", "§ III. Speech Synthesis"])
+t1, t2, t3 = st.tabs(["I. Document Intelligence", "II. Acoustic Analysis", "III. Speech Synthesis"])
 
 # =========================================================
 # MODULE 1 — DOCUMENT INTELLIGENCE (OCR)
@@ -441,7 +440,7 @@ with t1:
                     full_text = "\n".join(lines)
                     st.markdown(f'<div class="transcript-well">{full_text}</div>', unsafe_allow_html=True)
                     st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
-                    st.download_button("Export as .txt", full_text, file_name="meridian_ocr.txt")
+                    st.download_button("Export as .txt", full_text, file_name="ocr.txt")
 
                 except Exception as e:
                     st.error(f"Extraction error: {e}")
@@ -492,7 +491,7 @@ with t2:
                     if stt_result.reason == speechsdk.ResultReason.RecognizedSpeech:
                         st.markdown(f'<div class="transcript-well" style="height:auto;min-height:140px;">{stt_result.text}</div>', unsafe_allow_html=True)
                         st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
-                        st.download_button("Export Transcript (.txt)", stt_result.text, file_name="meridian_transcript.txt")
+                        st.download_button("Export Transcript (.txt)", stt_result.text, file_name="transcript.txt")
                     else:
                         st.error("Audio could not be recognised. Please verify the file.")
 
@@ -538,7 +537,7 @@ with t3:
                     speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
                     speech_config.speech_synthesis_voice_name = "en-US-ChristopherNeural"
 
-                    out_file     = "meridian_voice.wav"
+                    out_file     = "voice.wav"
                     audio_config = speechsdk.audio.AudioOutputConfig(filename=out_file)
                     synthesizer  = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
                     synthesizer.speak_text_async(user_script).get()
