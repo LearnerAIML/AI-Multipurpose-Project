@@ -12,18 +12,8 @@ The application is divided into three easy-to-use modules:
 *   **🎙️ II. Speech Synthesis (TTS):** Type or paste any text, choose between a Male or Female voice, and generate a downloadable audio file (`.wav`).
 *   **🔊 III. Image to Speech:** The ultimate combo! Upload an image containing text, and the app will automatically extract the text and read it out loud for you.
 
-## 🛠️ Prerequisites
-
-Before you start, you'll need:
-1.  **Python** installed on your computer.
-2.  An active **Microsoft Azure** account with resources created for:
-    *   Computer Vision (for extracting text)
-    *   Speech Services (for generating audio)
-
-## 🚀 Quick Start Guide
-
-### 1. Install Dependencies
-Open your terminal or command prompt and run the following command to install the required Python libraries:
+## Usage
+To use the project, visit https://readifyai.streamlit.app/ url.
 
 ```bash
 pip install streamlit pillow azure-cognitiveservices-vision-computervision msrest azure-cognitiveservices-speech
