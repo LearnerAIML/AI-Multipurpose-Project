@@ -368,7 +368,7 @@ st.markdown("""
         <span class="masthead-diamond">◈</span>
         <hr/>
     </div>
-    <div class="masthead-tagline">Document Intelligence &nbsp;·&nbsp; Acoustic Analysis &nbsp;·&nbsp; Speech Synthesis</div>
+    <div class="masthead-tagline">Document Intelligence &nbsp;·&nbsp; Speech Synthesis &nbsp;·&nbsp; Image To Speech</div>
     <div class="masthead-status">Made using Microsoft Azure</div>
 </div>
 """, unsafe_allow_html=True)
@@ -378,7 +378,7 @@ st.markdown("<div style='height:32px'></div>", unsafe_allow_html=True)
 # =========================================================
 # TABS
 # =========================================================
-t1, t2, t3 = st.tabs(["I. Document Intelligence", "II. Acoustic Analysis", "III. Speech Synthesis"])
+t1, t2, t3 = st.tabs(["I. Document Intelligence", "II. Speech Synthesis", "III. Image to Speech"])
 
 # =========================================================
 # MODULE 1 — DOCUMENT INTELLIGENCE (OCR)
@@ -392,7 +392,8 @@ with t1:
         image_file = st.file_uploader(
             "Upload Target Document",
             type=["png", "jpg", "jpeg"],
-            label_visibility="collapsed"
+            label_visibility="collapsed",
+            key="ocr_uploader"
         )
 
         if image_file:
@@ -438,7 +439,7 @@ with t1:
                     full_text = "\n".join(lines)
                     st.markdown(f'<div class="transcript-well">{full_text}</div>', unsafe_allow_html=True)
                     st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
-                    st.download_button("Export as .txt", full_text, file_name="ocr.txt")
+                    st.download_button("Export as .txt", full_text, file_name="ocr.txt", key="ocr_download")
 
                 except Exception as e:
                     st.error(f"Extraction error: {e}")
@@ -452,61 +453,9 @@ with t1:
         st.markdown('</div>', unsafe_allow_html=True)
 
 # =========================================================
-# MODULE 2 — ACOUSTIC ANALYSIS (STT)
+# MODULE 2 — SPEECH SYNTHESIS (TTS)
 # =========================================================
 with t2:
-    st.markdown('<div class="panel-heading">◈ &nbsp; Audio Transcription</div>', unsafe_allow_html=True)
-
-    audio_file = st.file_uploader(
-        "Upload Audio (.wav)",
-        type=["wav"],
-        label_visibility="collapsed"
-    )
-
-    if audio_file:
-        st.audio(audio_file)
-        st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
-
-        c1, c2, c3 = st.columns([1, 2, 1])
-        with c2:
-            process_audio = st.button("Transcribe Recording")
-
-        st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
-
-        if process_audio:
-            with st.spinner("Transcribing audio..."):
-                with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
-                    tmp.write(audio_file.read())
-                    tmp_path = tmp.name
-
-                try:
-                    speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
-                    audio_config  = speechsdk.audio.AudioConfig(filename=tmp_path)
-                    recognizer    = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
-                    stt_result    = recognizer.recognize_once()
-
-                    if stt_result.reason == speechsdk.ResultReason.RecognizedSpeech:
-                        st.markdown(f'<div class="transcript-well" style="height:auto;min-height:140px;">{stt_result.text}</div>', unsafe_allow_html=True)
-                        st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
-                        st.download_button("Export Transcript (.txt)", stt_result.text, file_name="transcript.txt")
-                    else:
-                        st.error("Audio could not be recognised. Please verify the file.")
-
-                except Exception as e:
-                    st.error(f"Transcription error: {e}")
-    else:
-        st.markdown("""
-        <div style="padding:40px 0; text-align:center; color:#C8C0B0; font-family:'Literata',serif; font-style:italic; font-size:13px;">
-            Upload a .wav file to begin transcription
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# =========================================================
-# MODULE 3 — SPEECH SYNTHESIS (TTS)
-# =========================================================
-with t3:
     col_text, col_audio = st.columns([1.4, 1], gap="large")
 
     with col_text:
@@ -542,7 +491,7 @@ with t3:
                     st.success("Voice synthesised successfully.")
                     st.audio(audio_data, format="audio/wav")
                     st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
-                    st.download_button("Download Audio (.wav)", audio_data, file_name=out_file)
+                    st.download_button("Download Audio (.wav)", audio_data, file_name=out_file, key="tts_download")
 
                 except Exception as e:
                     st.error(f"Synthesis error: {e}")
@@ -557,3 +506,92 @@ with t3:
             """, unsafe_allow_html=True)
 
         st.markdown('</div>', unsafe_allow_html=True)
+
+# =========================================================
+# MODULE 3 — IMAGE TO SPEECH (OCR + TTS)
+# =========================================================
+with t3:
+    col_in3, col_out3 = st.columns([1, 1.5], gap="large")
+
+    with col_in3:
+        st.markdown('<div class="panel-heading">◈ &nbsp; Upload Document For Reading</div>', unsafe_allow_html=True)
+
+        image_file_t3 = st.file_uploader(
+            "Upload Target Document",
+            type=["png", "jpg", "jpeg"],
+            label_visibility="collapsed",
+            key="img_to_speech_uploader"
+        )
+
+        if image_file_t3:
+            st.image(image_file_t3, use_container_width=True)
+            st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+
+            m1_t3, m2_t3 = st.columns(2)
+            m1_t3.metric("Size", f"{image_file_t3.size / 1024:.1f} KB")
+            m2_t3.metric("Format", image_file_t3.type.split('/')[-1].upper())
+
+            st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+            execute_img_to_speech = st.button("Read Document Aloud")
+        else:
+            st.markdown("""
+            <div style="padding:40px 0; text-align:center; color:#C8C0B0; font-family:'Literata',serif; font-style:italic; font-size:13px;">
+                Drop your document here<br>to convert directly to voice
+            </div>
+            """, unsafe_allow_html=True)
+
+    with col_out3:
+        st.markdown('<div class="panel-heading">◈ &nbsp; Processed Output</div>', unsafe_allow_html=True)
+
+        if image_file_t3 and 'execute_img_to_speech' in locals() and execute_img_to_speech:
+            with st.spinner("Extracting text and synthesising voice..."):
+                try:
+                    # --- STEP 1: OCR ---
+                    response = vision_client.read_in_stream(io.BytesIO(image_file_t3.read()), raw=True)
+                    op_id    = response.headers["Operation-Location"].split("/")[-1]
+
+                    while True:
+                        result = vision_client.get_read_result(op_id)
+                        if result.status not in [OperationStatusCodes.running, OperationStatusCodes.not_started]:
+                            break
+                        time.sleep(0.5)
+
+                    lines = []
+                    if result.status == OperationStatusCodes.succeeded:
+                        for page in result.analyze_result.read_results:
+                            for line in page.lines:
+                                lines.append(line.text)
+
+                    extracted_text = "\n".join(lines)
+
+                    if not extracted_text.strip():
+                        st.warning("No text was found in the uploaded image.")
+                    else:
+                        # Display Text
+                        st.markdown(f'<div class="transcript-well" style="height:200px;">{extracted_text}</div>', unsafe_allow_html=True)
+                        st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
+
+                        # --- STEP 2: TTS ---
+                        speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
+                        speech_config.speech_synthesis_voice_name = "en-US-ChristopherNeural"
+
+                        out_file_t3     = "vision_to_voice.wav"
+                        audio_config_t3 = speechsdk.audio.AudioOutputConfig(filename=out_file_t3)
+                        synthesizer_t3  = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config_t3)
+                        synthesizer_t3.speak_text_async(extracted_text).get()
+
+                        audio_data_t3 = open(out_file_t3, "rb").read()
+
+                        st.success("Voice synthesised successfully from document.")
+                        st.audio(audio_data_t3, format="audio/wav")
+                        st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
+                        st.download_button("Download Audio (.wav)", audio_data_t3, file_name=out_file_t3, key="img2speech_download")
+
+                except Exception as e:
+                    st.error(f"Processing error: {e}")
+        else:
+            st.markdown("""
+            <div class="transcript-well">
+                <div class="transcript-empty">Awaiting document ingestion…</div>
+            </div>
+            """, unsafe_allow_html=True)
