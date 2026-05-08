@@ -3,3 +3,4 @@ azure-cognitiveservices-speech
 azure-cognitiveservices-vision-computervision
 msrest
 azure-core
+pydub
